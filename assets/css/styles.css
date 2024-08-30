@@ -1,0 +1,108 @@
+/* Estilos básicos do corpo */
+body {
+  background-color: #f0f0f0;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Estilos do contêiner do jogo */
+#hangman-game {
+  background-color: #fff;
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  background-image: linear-gradient(to bottom, #add8e6 2px, transparent 2px); /* Linhas horizontais azuis claras */
+  background-size: 100% 22px; /* Espaçamento das linhas */
+}
+
+/* Estilos do título */
+#hangman-game h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* Estilos da palavra secreta */
+#word-container #word {
+  font-size: 24px;
+  text-align: center;
+  margin: 10px 0;
+  color: #0000ff; /* Azul para a palavra oculta */
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Espaço entre as letras */
+}
+
+/* Estilos das letras sublinhadas */
+#word-container #word span {
+  border-bottom: 4px solid #0000ff; /* Linha mais grossa e azul */
+  display: inline-block;
+  width: 20px; /* Largura de cada letra */
+  text-align: center;
+}
+
+/* Estilos para letras erradas */
+#game-status #wrong-letters {
+  font-size: 20px;
+  text-align: center;
+  margin: 10px 0;
+  color: #ff0000; /* Vermelho para letras erradas */
+}
+
+/* Estilos da imagem da forca */
+#game-status #hangman {
+  display: block;
+  margin: 0 auto 20px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Estilos da entrada de letra */
+#controls input#guess-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilos dos botões */
+#controls button {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+/* Estilos de hover dos botões */
+#controls button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para letras em negrito e sublinhadas */
+.underline-bold {
+  font-weight: bold;
+}
+
+/* Estilos da mensagem de alerta */
+#message-container #message {
+  text-align: center;
+  color: red;
+  margin-top: 20px;
+  font-size: 18px;
+}

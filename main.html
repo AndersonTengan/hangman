@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da Forca</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div id="hangman-game">
+    <h1>Jogo da Forca</h1>
+
+    <div id="category-container">
+      <label for="category-select">Escolha uma categoria:</label>
+      <select id="category-select">
+        <option value="animais">Animais</option>
+        <option value="paises">Países</option>
+        <option value="comidas">Comidas</option>
+      </select>
+    </div>
+
+    <div id="word-container">
+      <div id="word" aria-label="Palavra Secreta"></div>
+    </div>
+
+    <div id="game-status">
+      <div id="wrong-letters" aria-label="Letras Erradas"></div>
+      <img id="hangman" src="assets/imagens/forca0.jpg" alt="Forca">
+    </div>
+
+    <div id="controls">
+      <input 
+        type="text" 
+        id="guess-input" 
+        maxlength="1" 
+        autofocus 
+        placeholder="Digite uma letra" 
+        aria-label="Entrada de Letra"
+      >
+      <button id="guess-button">Adivinhar</button>
+      <button id="new-game-button" style="display: none;">Nova Partida</button>
+    </div>
+
+    <div id="message-container">
+      <div id="message" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script src="index.js" defer></script>
+</body>
+</html>

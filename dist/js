@@ -1,0 +1,107 @@
+"use strict";
+const wordsByCategory = {
+    animais: ["cachorro", "gato", "elefante"],
+    paises: ["brasil", "canada", "japao"],
+    comidas: ["pizza", "sushi", "chocolate"]
+};
+let selectedCategory = "animais";
+let selectedWord = getRandomWord(wordsByCategory[selectedCategory]);
+let correctGuesses = [];
+let incorrectGuesses = [];
+let errorCount = 0;
+const categorySelectElement = document.getElementById("category-select");
+const wordElement = document.getElementById("word");
+const incorrectLettersElement = document.getElementById("wrong-letters");
+const hangmanImageElement = document.getElementById("hangman");
+const guessInputElement = document.getElementById("guess-input");
+const guessButtonElement = document.getElementById("guess-button");
+const messageElement = document.getElementById("message");
+const newGameButtonElement = document.getElementById("new-game-button");
+categorySelectElement.addEventListener("change", handleCategoryChange);
+guessButtonElement.addEventListener("click", handleGuess);
+newGameButtonElement.addEventListener("click", resetGame);
+initializeGame();
+function initializeGame() {
+    displayWord();
+    updateIncorrectGuesses();
+    guessInputElement.value = '';
+    newGameButtonElement.style.display = "none";
+}
+function getRandomWord(wordList) {
+    return wordList[Math.floor(Math.random() * wordList.length)];
+}
+function displayWord() {
+    wordElement.innerHTML = selectedWord
+        .split("")
+        .map(letter => correctGuesses.includes(letter) ? letter : '<span class="underline-bold">_</span>')
+        .join(" ");
+}
+function updateIncorrectGuesses() {
+    incorrectLettersElement.innerHTML = incorrectGuesses.join(", ");
+    hangmanImageElement.src = `assets/imagens/forca${errorCount}.jpg`;
+}
+function handleCategoryChange() {
+    selectedCategory = categorySelectElement.value;
+    resetGame();
+}
+function handleGuess() {
+    const guessedLetter = guessInputElement.value.toLowerCase();
+    if (!/^[a-z]$/.test(guessedLetter)) {
+        showMessage("Por favor, insira uma letra válida!");
+        return;
+    }
+    if (isAlreadyGuessed(guessedLetter)) {
+        showMessage("Você já tentou essa letra!");
+    }
+    else {
+        processGuess(guessedLetter);
+    }
+    guessInputElement.value = '';
+}
+function isAlreadyGuessed(letter) {
+    return correctGuesses.includes(letter) || incorrectGuesses.includes(letter);
+}
+function processGuess(letter) {
+    if (selectedWord.includes(letter)) {
+        correctGuesses.push(letter);
+    }
+    else {
+        incorrectGuesses.push(letter);
+        errorCount++;
+    }
+    displayWord();
+    updateIncorrectGuesses();
+    checkGameStatus();
+}
+function checkGameStatus() {
+    if (isGameOver()) {
+        endGame(`Você perdeu! A palavra era "${selectedWord}"`);
+    }
+    else if (isGameWon()) {
+        endGame("Parabéns! Você venceu!");
+    }
+}
+function isGameOver() {
+    return errorCount >= 7;
+}
+function isGameWon() {
+    return !wordElement.innerText.includes("_");
+}
+function endGame(message) {
+    alert(message);
+    newGameButtonElement.style.display = "block";
+}
+function showMessage(message) {
+    messageElement.innerText = message;
+    messageElement.style.display = "block";
+    setTimeout(() => {
+        messageElement.style.display = "none";
+    }, 2000);
+}
+function resetGame() {
+    correctGuesses = [];
+    incorrectGuesses = [];
+    errorCount = 0;
+    selectedWord = getRandomWord(wordsByCategory[selectedCategory]);
+    initializeGame();
+}
